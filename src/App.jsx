@@ -7,7 +7,7 @@ import { TestimoniosWorkspace } from './components/Testimonios';
 import imgBannerClass from '../src/assets/banner.png'
 import imgTestimonioKinder from '../src/assets/testimonio.png'
 import { FuncionalidadesCarousel } from './components/FuncionalidadesCarousel';
-import { BannerPromocional } from './components/BannerClassReport';
+import { BannerPromocional } from './components/BannerPromocional';
 
 
 // Mismos pasos que Class Report, listos para usar
@@ -265,6 +265,7 @@ export default function KinderReport() {
         descripcion="Si buscas una app más enfocada en la comunicación entre profesores y clases de primaria y secundaria."
         colorTema="#ff7a45"
         imagenUrl={imgBannerClass}
+        degradado='0%'
       />
       {/* =========================================
           7. TESTIMONIOS (RECICLADO MORADO)

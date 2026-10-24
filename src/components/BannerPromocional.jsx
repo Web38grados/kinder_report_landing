@@ -1,22 +1,22 @@
 
-// Cambiamos el nombre a algo más general ya que servirá para ambos
 export function BannerPromocional({
-  subtitulo = "PARA PRE-ESCOLAR",
-  titulo = "Kinder Report",
-  descripcion = "Si buscas una app más enfocada en la comunicación entre profesores y clases de pre-escolar.",
+  subtitulo = "PARA COLEGIOS",
+  titulo = "Class Report",
+  descripcion = "Si buscas una app más enfocada en la comunicación entre profesores y clases de primaria y secundaria.",
   textoBoton = "Conocer más",
   linkBoton = "#",
   imagenUrl,
-  // Color por defecto morado, pero puedes pasarle el naranja
-  colorTema = "#8424c4" 
+  // 1. PROP PARA ELEGIR EL COLOR (Naranja por defecto)
+  colorTema = "#ff7a45",
+  degradado = '100%'
 }) {
   return (
     <section className="relative w-full bg-white mt-20 mb-20 flex flex-col md:block">
       
       {/* =========================================
-          LADO DERECHO: IMAGEN PEGADA AL BORDE
+          LADO DERECHO: IMAGEN PEGADA AL BORDE CON FILTRO DE COLOR
           ========================================= */}
-      <div className="w-full h-[300px] md:absolute md:top-0 md:right-0 md:w-1/2 md:h-full z-0">
+      <div className="w-full h-[300px] md:absolute md:top-0 md:right-0 md:w-1/2 md:h-full z-0 relative">
         {imagenUrl && (
           <img 
             src={imagenUrl} 
@@ -24,6 +24,15 @@ export function BannerPromocional({
             className="w-full h-full object-cover object-left"
           />
         )}
+        
+        {/* 2. CAPA DE DEGRADADO DINÁMICO SOBRE LA IMAGEN */}
+        {/* Usa el colorTema para hacer una transición de transparente al color sólido */}
+        <div 
+          className="absolute inset-0 opacity-100"
+          style={{
+            background: `linear-gradient(to right, #ffffff00 ${degradado}, ${colorTema} 100%)`
+          }}
+        ></div>
       </div>
 
       {/* =========================================
@@ -51,15 +60,18 @@ export function BannerPromocional({
             {descripcion}
           </p>
 
-          {/* Botón delineado (Outlined) Dinámico */}
+          {/* 3. BOTÓN CON BORDES Y HOVER DINÁMICOS */}
           <a 
             href={linkBoton}
-            className="w-max px-10 py-3 border-2 font-bold rounded-full transition-all duration-300 active:scale-95 hover:!bg-[var(--tema)] hover:!text-white text-center"
+            className="w-max px-10 py-3 border-2 font-bold rounded-full transition-all duration-300 active:scale-95 text-center hover:!text-white"
             style={{ 
               borderColor: colorTema, 
               color: colorTema,
-              '--tema': colorTema // Inyectamos el color a Tailwind para el hover
+              // Usamos una variable CSS inline para que el hover funcione dinámicamente con Tailwind
+              '--tw-hover-bg': colorTema 
             }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colorTema}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
             {textoBoton}
           </a>
